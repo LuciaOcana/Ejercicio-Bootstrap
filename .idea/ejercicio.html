@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ejercicio Bootstrap</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Incluye los estilos de Bootstrap ¡IMPORTANTE PARA QUE SE VEA BIEN! -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- ----------------------------------------------------------------------------------------------- -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('button').addEventListener('click', function(event) {
+
+                event.preventDefault(); // Prevent form submission (if not needed)
+
+        // Get the username from the input field
+        var inputField = document.getElementById('usr');
+        var username = inputField.value.trim(); // Trim to remove extra spaces
+
+        // Check if the input field is not empty
+        if (username !== '') {
+          var githubUserUrl = 'https://api.github.com/users/' + username;
+          var userReposUrl = 'https://api.github.com/users/' + username + '/repos';
+
+          // Clear existing table rows
+          var tbody = document.querySelector('tbody');
+          tbody.innerHTML = '';
+
+          $.get(githubUserUrl, function(data, status) {
+            if (status === 'success') {
+              // Access the 'login' property from the API response
+              var userLogin = data.login;
+            }
+          });
+
+          $.get(userReposUrl, function(data, status) {
+            if (status === 'success') {
+              // Loop through user's repositories and populate the table
+              data.forEach(function(repo) {
+
+               //Hay que pone los nombres de la API RES de github
+                var id = repo.id;
+                var name = repo.name;
+                var description = repo.description;
+
+
+                // Check if description is null and replace it with "No description"
+                if (description === null) {
+                  description = "No description";
+                }
+
+                // Create a new table row
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = '<td>' + id + '</td><td>' + name + '</td><td>' + description + '</td>';
+
+                // Append the new row to the table body
+                tbody.appendChild(newRow);
+              });
+            }
+          });
+        }
+      });
+    });
+    </script>
+    </head>
+
+<!-- ----------------------------------------------------------------------------------------------- -->
+    <body>
+
+    <div class="Ejercicio">
+        <h1>Ejercicio Bootstrap</h1>
+        <p>Porfavor inserta tu nombre de usuario de Github:)</p>
+
+    <!-- Insertar nombre de usuario -->
+        <form id="nombreForm" class="form-inline">
+
+        <!-- Creamos el label en el que vamos a insertar el userName -->
+        <p1>Name: </p1>
+        <input type="text" class="form-control" id="usr" placeholder="Inserte un usermane">
+
+        <!-- Creamos el botón al que le damos para añadir a la tabla -->
+        <button id="button" class="btn btn-primary mb-2">Enviar</button>
+
+        </form>
+        <!-- Tabla donde se insertaran los nombre de usuario -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="tablaUsuarios">
+                <!-- Aquí se insertarán los usuarios -->
+            </tbody>
+        </table>
+    </div>
+    </body>
+
+</html>
