@@ -64,40 +64,43 @@
       });
     });
     </script>
-    </head>
+</head>
 
 <!-- ----------------------------------------------------------------------------------------------- -->
-    <body>
+<body>
 
-    <div class="Ejercicio">
-        <h1>Ejercicio Bootstrap</h1>
-        <p>Porfavor inserta tu nombre de usuario de Github:)</p>
+<div class="Ejercicio container p-3 my-3 bg-dark text-white">
+    <h1>Repositorios de GitHub</h1>
+    <p>Para poder encontrar los repositorios de GitHub del usuario que desa, insertelo en la cajita:</p>
 
-    <!-- Insertar nombre de usuario -->
-        <form id="nombreForm" class="form-inline">
+</div>
+<div class="container p-3 my-3 border">
+    <form id="nombreForm">
+        <!-- Insertar nombre de usuario -->
+        <div id="nombreForm" class="form-inline">
 
-        <!-- Creamos el label en el que vamos a insertar el userName -->
-        <p1>Name: </p1>
-        <input type="text" class="form-control" id="usr" placeholder="Inserte un usermane">
-
+            <!-- Creamos el label en el que vamos a insertar el userName -->
+            <p1>Name: </p1>
+            <input type="text" class="form-control" id="usr" placeholder="Inserte un usermane">
+        </div>
         <!-- Creamos el botón al que le damos para añadir a la tabla -->
-        <button id="button" class="btn btn-primary mb-2">Enviar</button>
+        <button type="button" d="button" class="btn btn-primary">Buscar</button>
 
-        </form>
-        <!-- Tabla donde se insertaran los nombre de usuario -->
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody id="tablaUsuarios">
-                <!-- Aquí se insertarán los usuarios -->
-            </tbody>
-        </table>
-    </div>
-    </body>
+    </form>
+    <!-- Tabla donde se insertaran los nombre de usuario -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody id="tablaUsuarios">
+        <!-- Aquí se insertarán los usuarios -->
+        </tbody>
+    </table>
+</div>
+</body>
 
 </html>
